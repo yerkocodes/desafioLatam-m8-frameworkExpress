@@ -1,0 +1,24 @@
+{
+  "name": "abracadabra",
+  "version": "1.0.0",
+  "description": "Desafío 'Abracadabra' Desafío Latam Edutecno.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yerkodigo/desafioLatam-m8-frameworkExpress.git"
+  },
+  "author": "Yerko Cortés",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yerkodigo/desafioLatam-m8-frameworkExpress/issues"
+  },
+  "homepage": "https://github.com/yerkodigo/desafioLatam-m8-frameworkExpress#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
+  }
+}
