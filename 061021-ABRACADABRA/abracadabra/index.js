@@ -40,6 +40,13 @@ app.get('/abracadabra/juego/:usuario', (req, res) => {
   };
 });
 
+app.get('/abracadabra/conejo/:n', (req, res) => {
+  const numberParams = req.params.n;
+  const randomNumber = Math.floor(Math.random() * 4) + 1;
+  console.log('NumberParams: ' + numberParams + ' - ' + 'RandomNumber: ' + randomNumber);
+  res.sendFile( numberParams == randomNumber ? __dirname + '/assets/img/conejito.jpg' : __dirname + '/assets/img/voldemort.jpg' );
+});
+
 app.get('*', (req, res) => {
   res.send('Esta página no existe.');
 });
