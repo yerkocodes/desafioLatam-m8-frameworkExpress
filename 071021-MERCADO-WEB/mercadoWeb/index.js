@@ -26,8 +26,11 @@ app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/c
 //Middleware Jquery.
 //app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
+app.use('/images', express.static(__dirname + '/public/img'));
+
 app.get('/', (req, res) => {
   res.render('Inicio', {
     layout: 'Inicio',
+    productos: [ 'banana', 'cebollas', 'lechuga', 'papas', 'pimenton', 'tomate' ],
   });
 });
