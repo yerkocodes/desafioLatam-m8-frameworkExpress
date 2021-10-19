@@ -5,9 +5,7 @@ const PORT = process.env.PORT || 3000;
 const routesFile = require('./routes/routes');
 
 //Servidor a la escucha.
-app.listen(PORT, () => {
-  console.log('Listening server on port: ' + PORT);
-});
+app.listen(PORT, () => console.log(`Listening server on port: ${PORT}`));
 
 //Definir handlebars como motor de vista.
 app.set('view engine', 'handlebars');

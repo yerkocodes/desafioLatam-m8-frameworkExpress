@@ -14,16 +14,8 @@
   </head>
   <body>
     {{> Menu}}
-    <div class="container my-4">
-      <h1 class="text-center fw-bold my-3">Bienvenido al mercado WEB, seleccione sus productos.</h1>
-          {{> Dashboard}}
-    </div>
-    <script src="/jquery/jquery.min.js"></script>
+    {{> Dashboard}}
     <script src="/script/index.js"></script>
-    <script charset="utf-8">
-      $(document).ready(() => {
-        $('h5').css('text-transform', 'capitalize');
-      });
-    </script>
+    <script src="/jquery/jquery.min.js"></script>
   </body>
 </html>
