@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const expressHandlebars = require('express-handlebars');
 const PORT = process.env.PORT || 3000;
+const routesFile = require('./routes/routes');
 
 //Servidor a la escucha.
 app.listen(PORT, () => {
@@ -26,11 +27,11 @@ app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/c
 //Middleware Jquery.
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
+//Middleware Imagenes.
 app.use('/images', express.static(__dirname + '/public/img'));
 
-app.get('/', (req, res) => {
-  res.render('Inicio', {
-    layout: 'Inicio',
-    productos: [ 'banana', 'cebollas', 'lechuga', 'papas', 'pimenton', 'tomate' ],
-  });
-});
+//Middleware Script file.
+app.use('/script', express.static(__dirname + '/public/assets/js'))
+
+//Middleware rutas.
+app.use(routesFile);
