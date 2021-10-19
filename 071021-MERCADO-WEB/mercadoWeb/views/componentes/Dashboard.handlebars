@@ -1,5 +1,11 @@
 {{#each productos}}
-<div class="col-4 text-center">
-  <img src="/images/{{this}}.png" alt="{{this}}">
+<div class="card m-auto my-4" style="width: 18rem;">
+  <div class="border-bottom">
+    <img src="/images/{{this}}.png" class="card-img-top" alt="{{this}}">
+  </div>
+  <div class="card-body d-flex flex-column justify-content-center">
+    <h5 class="card-title text-center">{{this}}</h5>
+    <a href="/{{this}}" class="btn btn-success mt-3">Añadir al carrito</a>
+  </div>
 </div>
 {{/each}}

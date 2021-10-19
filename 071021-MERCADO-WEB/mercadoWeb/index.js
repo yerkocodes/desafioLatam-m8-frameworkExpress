@@ -24,7 +24,7 @@ app.engine(
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 //Middleware Jquery.
-//app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
 app.use('/images', express.static(__dirname + '/public/img'));
 
