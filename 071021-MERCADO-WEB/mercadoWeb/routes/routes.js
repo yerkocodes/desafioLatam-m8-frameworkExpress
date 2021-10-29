@@ -1,9 +1,6 @@
 const router = require('express').Router();
 
-const shopping = require('../controllers/shopping');
 const shoppingCart = require('../controllers/shoppingCart');
-
-//console.log(router)
 
 router.route('/')
   .get((req, res) => {
@@ -12,5 +9,8 @@ router.route('/')
       productos: [ 'banana', 'cebollas', 'lechuga', 'papas', 'pimenton', 'tomate' ],
     });
   });
+
+router.route('/modal/:producto')
+  .get(shoppingCart.addCart)
 
 module.exports = router;
