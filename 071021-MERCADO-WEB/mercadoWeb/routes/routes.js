@@ -13,4 +13,7 @@ router.route('/')
 router.route('/modal/:producto')
   .get(shoppingCart.addCart)
 
+router.route('/modal')
+  .get(shoppingCart.getCart)
+
 module.exports = router;

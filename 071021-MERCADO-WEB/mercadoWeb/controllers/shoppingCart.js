@@ -2,6 +2,28 @@ const pool = require('../db/init').getPoolInstance();
 
 module.exports = {
 
+  getCart: (req, res) => {
+    pool.connect( async ( err_connect, client, release ) => {
+      if( err_connect ) {
+        console.log(err_connect);
+      };
+
+      const SQLQuery = {
+        text: 'select * from shoppingcart',
+        values: [],
+      };
+
+      try {
+        const response = await client.query(SQLQuery);
+        res.end(JSON.stringify(response));
+      } catch ( err ) {
+        console.log(err.message);
+      } finally {
+        release();
+      };
+    });
+  },
+
   addCart: (req, res) => {
     const { producto } = req.params;
     //console.log(producto);
@@ -30,6 +52,6 @@ module.exports = {
       };
 
     });
-  }
+  },
 
 };

@@ -22,6 +22,9 @@ app.engine(
 //Middleware Bootstrap.
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
+//Middleware JS BUNDLE Bootstrap.
+app.use('/bootstrapbundle', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+
 //Middleware Jquery.
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
