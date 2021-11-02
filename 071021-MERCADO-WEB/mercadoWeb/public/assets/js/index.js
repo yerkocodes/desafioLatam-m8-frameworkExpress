@@ -18,7 +18,7 @@ const addCart = async (result) => {
   $("#exampleModal").modal("show");
 };
 
-const getCompras = async () => {
+const getCompras = async () => {  // TO DO!!!
   try {
     //tbody.innerHTML = "";
     const data = await axios.get('http://localhost:3000/modal')
