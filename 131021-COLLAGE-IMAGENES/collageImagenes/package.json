@@ -1,0 +1,26 @@
+{
+  "name": "collageimagenes",
+  "version": "1.0.0",
+  "description": "Desafio 'Collage de imagenes' Desafio Latam.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yerkodigo/desafioLatam-m8-frameworkExpress.git"
+  },
+  "author": "Yerko Cortes Baeza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yerkodigo/desafioLatam-m8-frameworkExpress/issues"
+  },
+  "homepage": "https://github.com/yerkodigo/desafioLatam-m8-frameworkExpress#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "nodemon": "^2.0.14"
+  }
+}
