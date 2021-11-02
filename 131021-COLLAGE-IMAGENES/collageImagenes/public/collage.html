@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="...">
   </head>
   <body>
-    <h1>Collage de imagenes</h1>
+
+    <div class="header">
+      <h1 class="header-title">Collage de imagenes</h1>
+      <span class="header-span">Presione sobre el numero de la imagen que desee remover.</span>
+    </div>
 
     <div class="grid-container" style="width: 600px">
       <div class="uno"><a href="/deleteImg/imagen-1.jpg">1</a></div>
@@ -33,6 +37,16 @@ body {
   text-align: center;
   padding: 10px;
 }
+  .header{
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    margin-bottom: 5px;
+  }
+  .header span{
+    color: gray;
+    font-style: italic;
+  }
   .uno {
     grid-area: uno;
   }
