@@ -53,4 +53,8 @@ router.post('/authLogin', controllerSkaters.skaterAuthLogin);
 
 router.get('/authLogin/:jwt', controllerSkaters.skaterAproved);
 
+router.put('/updateSkater', controllerSkaters.updateSkater);
+
+router.delete('/deleteSkater/:id', controllerSkaters.deleteSkater);
+
 module.exports = router;

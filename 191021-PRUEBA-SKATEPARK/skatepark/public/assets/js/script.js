@@ -3,6 +3,7 @@ const loginPassword = document.getElementById('loginPassword');
 const formLogin = document.getElementById('formLogin');
 const URL = 'http://localhost:3000';
 
+
 const checkStatus = async (id, inputMarkup) => {
   const check = inputMarkup.checked;
   axios.put(`${URL}/checkAuth`, {
@@ -12,7 +13,7 @@ const checkStatus = async (id, inputMarkup) => {
   // TO-DO : Mostrar mensaje que se cambio el estado del Skater.
 };
 
-formLogin.addEventListener('submit', (e) => {
+formLogin.addEventListener('submit', async (e) => {
   e.preventDefault();
   loginEmail;
   loginPassword;
@@ -27,4 +28,5 @@ formLogin.addEventListener('submit', (e) => {
       window.location.href=`/authLogin/${jwt}`;
     })
 })
+
 

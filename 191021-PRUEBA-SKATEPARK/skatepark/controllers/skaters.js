@@ -132,15 +132,56 @@ module.exports = {
     const { jwt } = req.params;
 
     jsonWebToken.verify(jwt, secretkey, ( err, data ) => {
-      console.log(data.data);
       const dataUser = [];
       dataUser.push(data.data);
+      //console.log(data)
+      //console.log(dataUser[0]);
 
       res.render('datos', {
         layout: 'datos',
-        dataUser,
+        dataUser: dataUser[0],
       });
 
+    });
+  },
+
+  updateSkater: (req, res) => {
+    const { id, name, pass, passTwo, experience, specialty } = req.body;
+
+    pool.connect( async ( err_connect, client, release ) => {
+      const SQLQuery = {
+        text: `update skaters set nombre = $1, password = $2, anos_experiencia = $3, especialidad = $4 where id = $5 returning *;`,
+        values: [ name, pass, experience, specialty, id ],
+      };
+      try {
+        const response = await client.query(SQLQuery);
+        //console.log(response.rows);
+        res.send(response);
+      } catch ( err ) {
+        console.log(err.message);
+      } finally {
+        release();
+      };
+    });
+  },
+
+  deleteSkater: (req, res) => {
+    const { id } = req.params
+    console.log(id);
+    pool.connect(async (err_connect, client, release) => {
+      const SQLQuery = {
+        text: `delete from skaters where id = $1 returning *;`,
+        values: [ id ],
+      };
+
+      try {
+        const response = await client.query(SQLQuery);
+        res.send(response);
+      } catch ( err ) {
+        console.log(err.message);
+      } finally {
+        release();
+      };
     });
   },
 };
