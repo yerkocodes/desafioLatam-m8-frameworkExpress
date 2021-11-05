@@ -18,12 +18,12 @@ router.use(express.static('public'));
 router.use('/css', express.static(path.join(__dirname, '../public/assets/css')));
 
 //Middleware Img file.
-router.use('/img', express.static(path.join(__dirname, '../public/assets/img')));
+router.use('/img', express.static(path.join(__dirname, '../imgProfileUsers')));
 
 //Middleware Script file.
 router.use('/script', express.static(path.join(__dirname, '../public/assets/js')));
 
-router.get('/', controllerSkaters.getSkaters)
+router.get('/', controllerSkaters.getSkatersHome)
 
 router.get('/login', (req, res) => {
   res.render('login', {
@@ -39,11 +39,9 @@ router.get('/registro', (req, res) => {
 
 router.post('/registro', controllerSkaters.postSkater);
 
-router.get('/admin', (req, res) => {
-  res.render('admin', {
-    layout: 'admin'
-  });
-});
+router.get('/admin', controllerSkaters.getSkatersAdmin);
+
+router.put('/checkAuth', controllerSkaters.skaterStatusChange);
 
 router.get('/datos', (req, res) => {
   res.render('datos', {
@@ -51,5 +49,8 @@ router.get('/datos', (req, res) => {
   });
 });
 
+router.post('/authLogin', controllerSkaters.skaterAuthLogin);
+
+router.get('/authLogin/:jwt', controllerSkaters.skaterAproved);
 
 module.exports = router;

@@ -1,56 +1,30 @@
-//alert('aaaaaah');
-//const formRegister = document.getElementById('formRegister');
+const loginEmail = document.getElementById('loginEmail');
+const loginPassword = document.getElementById('loginPassword');
+const formLogin = document.getElementById('formLogin');
+const URL = 'http://localhost:3000';
 
-//const email = document.getElementById('formEmail');
-//const name = document.getElementById('formName');
-//const password = document.getElementById('formPass');
-//const password2 = document.getElementById('formPassTwo');
-//const yearsExperience = document.getElementById('formExperience');
-//const specialty = document.getElementById('formSpecialty');
-//const picture = document.getElementById('formPic');
+const checkStatus = async (id, inputMarkup) => {
+  const check = inputMarkup.checked;
+  axios.put(`${URL}/checkAuth`, {
+    id,
+    check,
+  })
+  // TO-DO : Mostrar mensaje que se cambio el estado del Skater.
+};
 
-//const URL = 'http://localhost:3000/'
+formLogin.addEventListener('submit', (e) => {
+  e.preventDefault();
+  loginEmail;
+  loginPassword;
 
-//formRegister.addEventListener('submit', () => {
-  ////e.preventDefault();
-  //// GET request for remote image in node.js
-  //axios({
-    //method: 'post',
-    //url: URL,
-    //data: {
-      //email: email.value,
-      //name: name.value,
-      //password: password.value,
-      //password2: password2.value,
-      //yearsExperience: yearsExperience.value,
-      //specialty: specialty.value,
-      //picture: picture.value,
-    //}
-  //})
-    //.then((response) => {
-      //console.log(response);
-    //});
+  axios.post(`${URL}/authLogin`, {
+    email: loginEmail.value,
+    password: loginPassword.value,
+  })
+    .then((token) => {
+      //console.log(token.data);
+      const jwt = token.data;
+      window.location.href=`/authLogin/${jwt}`;
+    })
+})
 
-//})
-
-//const nuevoSkater = async () => {
-    //email;
-    //name;
-    //password;
-    //password2;
-    //yearsExperience;
-    //specialty;
-    //picture;
-
-  //let data = {
-    //email: email.value,
-    //name: name.value,
-    //password: password.value,
-    //password2: password2.value,
-    //yearsExperience: yearsExperience.value,
-    //specialty: specialty.value,
-    //picture: picture.value,
-  //};
-  //console.log(data);
-  //axios.post(URL + '/registro', data).then((response) => console.log(response));
-//}

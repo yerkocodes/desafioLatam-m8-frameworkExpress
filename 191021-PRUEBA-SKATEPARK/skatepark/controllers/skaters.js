@@ -1,8 +1,10 @@
 const pool = require('../db/init').getPoolInstance();
 const path = require('path');
+const jsonWebToken = require('jsonwebtoken');
+const secretkey = 'pacallao';
 
 module.exports = {
-  getSkaters: ( req, res ) => {
+  getSkatersHome: ( req, res ) => {
     pool.connect(async ( err_connect, client, release ) => {
       const SQLQuery = {
         text: `select * from skaters;`,
@@ -25,6 +27,30 @@ module.exports = {
     });
   },
 
+  getSkatersAdmin: ( req, res ) => {
+    pool.connect(async ( err_connect, client, release ) => {
+      const SQLQuery = {
+        text: `select * from skaters;`,
+        values: [],
+      };
+      try {
+        const response = await client.query(SQLQuery);
+        const skaters = response.rows;
+        //console.log(skaters);
+
+        res.render('admin', {
+          layout: 'admin',
+          skaters
+        });
+
+      } catch ( err ) {
+        console.log(err.message);
+      } finally {
+        release();
+      };
+    });
+  },
+
   postSkater: (req, res) => {
     const { email, nombre, password, password2, anos, especialidad } = req.body;
     const imageName = req.files.foto.name;
@@ -36,9 +62,9 @@ module.exports = {
       };
 
       try {
-        //const response = await client.query(SQLQuery);
+        const response = await client.query(SQLQuery);
         const imagen = req.files.foto;
-        const imgPath = path.join(__dirname, '../imgProfileUsers')
+        const imgPath = path.join(__dirname, '../imgProfileUsers');
         imagen.mv(`${imgPath}/${imagen.name}`, (err) => {
           err ? res.send('No se logro registrar al usuario.') : res.redirect('/');
         });
@@ -47,6 +73,74 @@ module.exports = {
       } finally {
         release();
       };
+    });
+  },
+
+  skaterStatusChange: (req, res) => {
+    //console.log(req.body);
+    const { id, check } = req.body;
+
+    pool.connect(async ( err_connect, client, release ) => {
+      const SQLQuery = {
+        text: `update skaters set estado = $1 where id = $2 returning *;`,
+        values: [ check, id ],
+      };
+      try {
+        const response = await client.query(SQLQuery);
+        //res.end(JSON.stringify(response));
+      } catch ( err ) {
+        console.log(err.message);
+      } finally {
+        release();
+      };
+    })
+  },
+
+  skaterAuthLogin: (req, res) => {
+    const { email, password } = req.body
+    //console.log(req.body);
+
+    pool.connect(async ( err_connect, client, release ) => {
+      const SQLQuery = {
+        text: `select * from skaters where email = $1 and password = $2;`,
+        values: [ email, password ],
+      };
+      try {
+        const response = await client.query(SQLQuery);
+        if ( response.rows[0] ) {
+          console.log('bien');
+          const token = jsonWebToken.sign({
+            exp: Math.floor(Date.now() / 1000) + 120, // expira en 2 minutos.
+            data: response.rows[0],
+          },
+            secretkey
+          );
+          res.send(token);
+        } 
+        else {
+          res.send('Usuario o contrasenas incorrectas.');
+        };
+      } catch ( err ) {
+        console.log(err.message);
+      } finally {
+        release();
+      };
+    });
+  },
+
+  skaterAproved: (req, res) => {
+    const { jwt } = req.params;
+
+    jsonWebToken.verify(jwt, secretkey, ( err, data ) => {
+      console.log(data.data);
+      const dataUser = [];
+      dataUser.push(data.data);
+
+      res.render('datos', {
+        layout: 'datos',
+        dataUser,
+      });
+
     });
   },
 };

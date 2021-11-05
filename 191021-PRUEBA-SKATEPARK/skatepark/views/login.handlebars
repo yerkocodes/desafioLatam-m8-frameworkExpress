@@ -20,20 +20,22 @@
       <h2>Iniciar Sesión</h2>
       <hr class="w-50" />
 
-      <form>
+      <form id="formLogin">
         <div class="form-group">
           <div class="form-group">
             <label>Email</label>
-            <input class="form-control w-50 m-auto" required/>
+            <input id="loginEmail" class="form-control w-50 m-auto" required/>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input class="form-control w-50 m-auto" required/>
+            <input id="loginPassword" class="form-control w-50 m-auto" required/>
           </div>
         </div>
         <button class="btn btn-success mb-3">Ingresar</button>
         <p>¿Aún no tienes cuenta? <a href="/registro">Regístrate</a></p>
       </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/script/script.js" charset="utf-8"></script>
   </body>
 </html>

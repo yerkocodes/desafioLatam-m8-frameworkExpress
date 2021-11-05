@@ -35,11 +35,11 @@
         <tbody>
           {{#each skaters}}
           <tr>
-            <th scope="row">1</th>
-            <td><img src="/img/this.foto" alt="{{this.nombre}}" width=""></td>
+            <th scope="row">{{@index}}</th>
+            <td><img src="/img/{{this.foto}}" alt="{{this.nombre}}" width="100"></td>
             <td>{{this.nombre}}</td>
-            <td>{{anos_experiencia}}</td>
-            <td>{{especialidad}}</td>
+            <td>{{this.anos_experiencia}}</td>
+            <td>{{this.especialidad}}</td>
             <td class="text-success font-weight-bold">{{#if this.estado}} Aprobado {{else}} En revision {{/if}}</td>
           </tr>
           {{/each}}
@@ -50,3 +50,5 @@
     </div>
   </body>
 </html>
+
+
