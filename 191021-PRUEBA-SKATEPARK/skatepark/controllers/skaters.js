@@ -98,7 +98,6 @@ module.exports = {
 
   skaterAuthLogin: (req, res) => {
     const { email, password } = req.body
-    //console.log(req.body);
 
     pool.connect(async ( err_connect, client, release ) => {
       const SQLQuery = {
@@ -107,18 +106,15 @@ module.exports = {
       };
       try {
         const response = await client.query(SQLQuery);
+        //console.log(response);
         if ( response.rows[0] ) {
-          console.log('bien');
           const token = jsonWebToken.sign({
-            exp: Math.floor(Date.now() / 1000) + 120, // expira en 2 minutos.
             data: response.rows[0],
-          },
-            secretkey
-          );
+          }, secretkey, { expiresIn: '5m' }); // Expires in 5 minutes.
           res.send(token);
         } 
         else {
-          res.send('Usuario o contrasenas incorrectas.');
+          res.send(false);
         };
       } catch ( err ) {
         console.log(err.message);
@@ -128,21 +124,19 @@ module.exports = {
     });
   },
 
-  skaterAproved: (req, res) => {
-    const { jwt } = req.params;
-
-    jsonWebToken.verify(jwt, secretkey, ( err, data ) => {
-      const dataUser = [];
-      dataUser.push(data.data);
-      //console.log(data)
-      //console.log(dataUser[0]);
-
-      res.render('datos', {
-        layout: 'datos',
-        dataUser: dataUser[0],
+  skaterAproved: async (req, res) => {
+    const { token } = req.query;
+    try {
+      jsonWebToken.verify(token, secretkey, ( err, data ) => {
+        res.render('datos', {
+          layout: 'datos',
+          dataUser: data.data,
+        });
       });
-
-    });
+    } catch ( err ) {
+      res.redirect('/login');
+      console.log(err.message);
+    };
   },
 
   updateSkater: (req, res) => {

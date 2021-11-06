@@ -50,8 +50,7 @@ router.get('/datos', (req, res) => {
 });
 
 router.post('/authLogin', controllerSkaters.skaterAuthLogin);
-
-router.get('/authLogin/:jwt', controllerSkaters.skaterAproved);
+router.get('/authLogin', controllerSkaters.skaterAproved);
 
 router.put('/updateSkater', controllerSkaters.updateSkater);
 
