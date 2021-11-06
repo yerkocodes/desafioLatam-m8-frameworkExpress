@@ -54,6 +54,8 @@ module.exports = {
   postSkater: (req, res) => {
     const { email, nombre, password, password2, anos, especialidad } = req.body;
     const imageName = req.files.foto.name;
+    //console.log(req.files);
+    //console.log(req.body);
 
     pool.connect(async ( err_connect, client, release ) => {
       const SQLQuery = {
@@ -63,8 +65,11 @@ module.exports = {
 
       try {
         const response = await client.query(SQLQuery);
+        //console.log(response);
         const imagen = req.files.foto;
+        //console.log(imagen)
         const imgPath = path.join(__dirname, '../imgProfileUsers');
+        //console.log(imgPath)
         imagen.mv(`${imgPath}/${imagen.name}`, (err) => {
           err ? res.send('No se logro registrar al usuario.') : res.redirect('/');
         });
